@@ -243,6 +243,51 @@ def main():
     else:
         print("Success!")
 
+#backtracking algorithim
+class Solver:
+    def __init__(self, puzzle):
+        self.puzzle = puzzle
+
+    def solve(self):
+        self.backtrack(0,0)
+
+    def backtrack(self, row, col):
+        #if reached to end of row, move to next
+        if col == 9:
+            row += 1
+            col = 0
+        #if at end of puzzle with found solution, return True for success.
+        if row == 9:
+            return True
+        #current cell not empty, move to next
+        if self.puzzle[row][col] != 0:
+            return self.backtrack(row, col + 1)
+        #the code for trying each possible value
+        for value in range(1, 10):
+            if self.is_valid(rol, col, value):
+                self.puzzle[row][col]=value
+                if self.backtrack(rol, col + 1):
+                    return True
+                self.puzzle[row][col] = 0
+        return False #used if number not correct, so it can backtrack
+    
+    def is_valid(self, row, col, value):
+        #check row
+        for i in range(9):
+            if self.puzzle[row][i] == value:
+                return False
+        #check column
+        for j in range(9):
+            if self.puzzle[j][col] == value:
+                return False
+        #check 3x3
+        for i in range(box_row, box_row + 3):
+            for j in range(box_col, box_col + 3):
+                if self.puzzle[i][j] == value:
+                    return False
+        return True #if valid is valid
+
+
 
 main()
 pygame.quit()
