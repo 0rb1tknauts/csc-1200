@@ -286,7 +286,7 @@ class Solver:
                 if self.puzzle[i][j] == value:
                     return False
         return True #if valid is valid
-
+#unfinishedcode as of current, will be done by Friday.
 
 
 main()
